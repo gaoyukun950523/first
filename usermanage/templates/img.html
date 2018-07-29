@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jquery-3.3.1.js"></script>
+</head>
+<body>
+    <input type="file" id="file">
+    <input type="button" value="提交" id="file_submit" onclick="fun1()">
+<div id="img_src">
+</div>
+    <script>
+        /*function fun1(){
+            var data=new FormData();
+            data.append("file",document.getElementById("file").files[0]);
+            var xmlHttp=new XMLHttpRequest();
+            xmlHttp.onreadystatechange=function(){
+                if(xmlHttp.readyState==4 && xmlHttp.status==200){
+                    obj=JSON.parse(xmlHttp.responseText);
+                    img=document.createElement("img");
+                    img.src="/"+obj;
+                    parent_img=document.getElementById("img_src");
+                    parent_img.appendChild(img);
+                }
+            };
+            xmlHttp.open("POST","/img/",true);
+            xmlHttp.send(data);
+        }
+        */
+        function fun1(){
+            var data=new FormData();
+            data.append("file",document.getElementById("file").files[0]);
+            $.ajax({
+                url:"/img/",
+                data:data,
+                type:"POST",
+                processData:false,           //jquery发送的自动是字符串，这两行是不做字符串处理
+                contentType:false,
+                success:function(arg) {
+                    obj=JSON.parse(arg);
+                    console.log(obj);
+                    img=document.createElement("img");
+                    img.src="/"+obj;
+                    parent_img=document.getElementById("img_src");
+                    parent_img.appendChild(img);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

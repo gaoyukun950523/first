@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="teacher_student_add">
+        <form action="/teacher_student_add" method="post">
+            <p>教师姓名:<input type="text" id="ter_name" name="tea_name"></p>
+            <select name="stu_info" id="stu_info" multiple>
+                {% for item in cls_all %}
+                    <option value={{ item.id }}>{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+{% endblock %}

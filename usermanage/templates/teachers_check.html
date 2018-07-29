@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="teacher_check">
+        <select name="teacher_check_name" id="teacher_check_name" onchange="fun1()">
+            {% for i in teacher_list%}
+                <option value="">{{ i.id }}|{{ i.name }}</option>
+            {% endfor %}
+        </select>
+        <div class="student_info hide" style="width: 400px;height: 200px;border: 1px solid red">
+            <p>老师所教学生信息表</p>
+            <table border="1">
+                <tr>
+                    <td>id</td>
+                    <td>姓名</td>
+                </tr>
+                {% for j in student_all %}
+                    <tr>
+                        <td>{{ j.id}}</td>
+                        <td>{{ j.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+    <script>
+        function fun1(){
+            a=$("#teacher_check_name option:selected").text();
+            $.ajax({
+                url:"teachers_check",
+                data:{teacher_id_name:a},
+                type:"POST"
+            });
+            $(".student_info").removeClass("hide");
+        }
+    </script>
+{% endblock %}

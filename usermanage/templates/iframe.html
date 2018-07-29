@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jquery-3.3.1.js"></script>
+</head>
+<body>
+<hr>
+<form action="/iframe" target="iframe_1" enctype="multipart/form-data" method="post">
+    <iframe src="" id="iframs" name="iframe_1" onload="loadiframe()"></iframe>
+    <input type="file" name="file">
+    <input type="submit">
+</form>
+<div id="img_src">
+
+</div>
+<script>
+    function loadiframe(){
+        var str_son=$("#iframs").contents().find("body").text();    //获取iframe标签中body的变化
+        var obj=JSON.parse(str_son);
+          img=document.createElement("img");
+          img.src="/"+obj;
+          parent_img=document.getElementById("img_src");
+          parent_img.appendChild(img);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="modal hide">
+        <input type="text" name="edit" id="text-edit">
+        <input type="button" value="提交" class="submit1">
+    </div>
+    <div class="hide1 hide"></div>
+    <div class="classes">
+    <a href="#" id="add">添加</a>
+    <table border="1">
+        <tr>
+            <td>班级id</td>
+            <td>班级</td>
+            <td>班级管理</td>
+        </tr>
+        {% for item in clases %}
+            <tr class={{ item.id }}>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>
+                    <a href="#" class="edit">编辑</a>|<a href="#" class="delete1">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <div class="class_add hide">
+    <form>
+        <input type="text" name="classname" id="classname">
+        <input type="button" value="添加" id="classsubmit">
+    </form>
+    </div>
+    <div class="page">
+    {% for i in ahref %}
+        <li>{{ i|safe }}</li>
+    {% endfor %}
+    </div>
+    <script>
+    $("#add").click(function(){       //点击添加按钮，添加界面出现，列表界面隐藏
+        $(".class_add").removeClass("hide");
+        $(".classes").addClass("hide");
+    });
+    $("#classsubmit").click(function(){       //提交添加的数据
+        $(".class_add").addClass("hide");
+        $(".classes").removeClass("hide");
+{#        var kk=$("#classname")[0].value;#}
+        var kk=$("#classname").val();
+        $.ajax({                                 //将添加数据提交到数据库
+            url:"/classes_add",
+            data:{name:kk},
+            type:"POST"
+        });
+    });
+    $("tr").each(function (i){
+       $(this).children("td").each(function(j){
+           $(this).children(".delete1").each(function(){
+               $(this).click(function(){
+                   get_id=$(this).parent().siblings().eq(0).text();
+                   $("."+get_id).remove();
+                   $.ajax({
+                       url:"/classes_del",
+                       type:"POST",
+                       data:{id1:get_id}
+                   });
+               });
+           });
+       });
+     });
+    $(".edit").each(function(){
+        $(this).click(function(){
+            textt=$(this).parent().siblings().eq(1).text();
+            textt_id=$(this).parent().siblings().eq(0).text();
+            //此处生成模态对话框
+            $(".hide1").removeClass("hide");
+            $(".modal").removeClass("hide");
+            $("#text-edit").attr("value",textt);  //设置编辑框中的默认值是点击所得
+            $(".submit1").click(function(){
+                 $.ajax({
+                url:"classes_update",
+                data:{edit:$("#text-edit").val(),edit_id:textt_id},
+                type:"POST"
+                });
+                $(".hide1").addClass("hide");
+                $(".modal").addClass("hide");
+                location.reload();
+            });
+
+        });
+    });
+    </script>
+{% endblock %}

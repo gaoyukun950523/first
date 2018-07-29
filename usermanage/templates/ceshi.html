@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.3.1.js"></script>
+</head>
+<body>
+    <select name="choice" id="choice" multiple>
+        <option value="1">属性</option>
+        <option value="2">运维</option>
+        <option value="3">网络</option>
+        <option value="5">电脑</option>
+    </select>
+    <select name="choice1" id="choice1" multiple>
+        <option value="1">属性1</option>
+        <option value="2">运维2</option>
+        <option value="3">网络3</option>
+        <option value="5">电脑4</option>
+    </select>
+    <input type="button" value="提交" id="submit">
+    <input type="button" value=">>>" id="right">
+    <input type="button" value="<<<" id="left">
+    <script>
+        $("#submit").click(function(){
+            //option=$("#choice option:selected");
+            var option=$("#choice")[0].selectedOptions;
+            alert(option[1].value);
+            //alert(option.text());
+            //alert(option[0].value);
+        });
+        $("#right").click(function(){
+            var option=$("#choice")[0].selectedOptions;
+            while(option.length>0){
+                $(option[0]).appendTo("#choice1");
+            }
+        });
+     $("#left").click(function(){
+        var option=$("#choice1")[0].selectedOptions;
+        while(option.length>0){
+            $(option[0]).appendTo("#choice");
+        }
+    });
+    </script>
+</body>
+</html>

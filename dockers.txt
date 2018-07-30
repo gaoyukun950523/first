@@ -1,0 +1,114 @@
+1.docker-machine.exe start default 启动default
+2.docker-machine.exe ssh default
+3.ls  路径下文件
+4.docker rm -f '镜像名'   删除镜像
+5.docker run -it -d -v /TBKT/ceshi/tbkt:/code -p 8000:8099 --name=ceshi --restart=always --entrypoint=python 122.114.40.73:5001/django:1.8.7 /code/manage.py runserver 0.0.0.0:8002
+6.docker logs -f --tail=20 '文件名'   运行文件
+
+7：docker-machine ssh default -L :8001:localhost:8001
+
+docker 删除镜像
+docker rmi + 镜像ID
+
+http://192.168.99.100:8099/huodong/summer_activity/   教师端地址
+
+docker logs -f hd_api_tea1
+
+docker-machine ls
+通过ls命令可查看当前已安装的主机
+docker-machine start|stop| 
+启动/停止主机
+docker-machine ssh
+进入 docker shell
+docker images
+docker images [options "o">] [name]
+docker search 镜像名字
+
+列出本地所有镜像。其中 [name] 对镜像名称进行关键词查询。
+docker ps
+列出所有运行中容器
+	-a 列出所有容器（含沉睡镜像）；
+
+	--before="nginx" 列出在某一容器之前创建的容器，接受容器名称和ID作为参数；
+
+	--since="nginx" 列出在某一容器之后创建的容器，接受容器名称和ID作为参数；
+
+	-f [exited=<int>] 列出满足
+	exited=<int> 条件的容器；
+
+	-l 仅列出最新创建的一个容器；
+
+	--no-trunc 显示完整的容器ID；
+
+	-n=4 列出最近创建的4个容器；
+
+	-q 仅列出容器ID；
+
+	-s 显示容器大小。
+
+
+
+
+docker run  -d --name=容器名字 -it -v /d/a/b/c(文件路径）:/code -p 8002:8000  镜像 /manage.py runserver 0.0.0.0:8000
+
+docker 镜像
+
+
+docker run  -d --name=hd_api -it -v D:\tb\hd_api_dj\tbkt:/code -p 8000:8000 --entrypoint=python hub.tbkt.cn:5001/django:1.8.7  /code/manage.py runserver 0.0.0.0:8000
+
+docker run -it -d -v /TBKT/ywziyuan_web_dj/tbkt:/code -p 8000:8066 --name=ywziyuan_web_dj --restart=always --entrypoint=python 122.114.40.73:5001/django:1.11.11 /code/manage.py runserver 0.0.0.0:8006
+
+
+
+
+
+
+本机运行--虚拟环境 文件地址 端口号  总是重启  镜像环境 运行文件
+
+docker ps -a 列出所有容器
+docker exec -it xxxx bash   进入某个容器
+pip install -U requests    下载新的 requests
+
+
+docker start con_name 启动容器名为con_name的容器
+docker stop con_name 停止容器名为con_name的容器
+日志： docker logs --tail=50 -f user_web_dj  
+重启： docker restart -t 0 user_web_dj
+
+
+
+
+ docker run 创建并启动一个容器，在run后面加上-d参数，则会创建一个守护式容器在后台运行。
+    docker ps -a 查看已经创建的容器
+    docker ps -s 查看已经启动的容器
+    docker start con_name 启动容器名为con_name的容器
+    docker stop con_name 停止容器名为con_name的容器
+    docker rm con_name 删除容器名为con_name的容器
+    docker rename old_name new_name 重命名一个容器
+
+
+查看本机已有镜像
+    docker images
+9. 删除构建的镜像
+    docker rmi -f local.image.app/spec.service:5.7.17
+
+
+
+docker run -d --restart=always --name=tbkt_api_sx -v D:/tbkt/tea_web_dj/code --entrypoint=python -p 0.0.0.0:8004:8004 hub.tbkt.cn:5001/django:1.8.7 /code/manage.py runserver 0.0.0.0:8000
+
+docker run -d --restart=always --name=web_tea -v D:/tbkt/tea_web_dj/tbkt:/code --entrypoint=python -p 0.0.0.0:8004:8004 hub.tbkt.cn:5001/django:1.8.7 /code/manage.py  runserver 0.0.0.0:8004
+
+mapi8.betam.tbkt.cn/account/login/s----postman 测试环境
+
+{"username":15038035398,
+"password":111111}--登录权限 --输入用户名密码 获取token
+
+select *,count(1) from active_award where active_id = 28 group by award_type
+
+docker run -d --restart=always --name=sx_api_dj -v D:\tbkt\sx_api_dj/tbkt:/code --entrypoint=python -p 0.0.0.0:8011:8011 hub.tbkt.cn:5001/django:1.8.7 /code/manage.py  runserver 0.0.0.0:8011
+
+
+docker run -d --restart=always --name=yw_api -v D:/com_api_dj/tbkt:/code --entrypoint=python -p 0.0.0.0:8021:8021 hub.tbkt.cn:5001/django:1.8.7 /code/manage.py  runserver 0.0.0.0:8021
+
+docker run -d --restart=always --name=oper_dj -v D:/tbkt/operate_cms_dj/tbkt_operate:/code --entrypoint=python -p 0.0.0.0:8022:8022 tbkt:5001/django:1.8.7 /code/manage.py  runserver 0.0.0.0:8022
+
